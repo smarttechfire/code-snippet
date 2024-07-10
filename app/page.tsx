@@ -1,10 +1,5 @@
-import { mainColor } from "@/Colors";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
-import DataObjectIcon from '@mui/icons-material/DataObject';
-import Image from "next/image";
-import Link from "next/link";
+
 
 export default function Home() {
   return (
@@ -13,12 +8,6 @@ export default function Home() {
     </div>
   );
 }
-
-
-
-
-
-
 
 function CTASection(){
   return(
