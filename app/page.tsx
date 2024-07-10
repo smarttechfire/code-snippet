@@ -1,7 +1,10 @@
 import { mainColor } from "@/Colors";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import DataObjectIcon from '@mui/icons-material/DataObject';
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -36,13 +39,26 @@ function Logo(){
 }
 
 function Buttons(){
+  const { userId } = auth();
   return(
-    <div className=" flex gap-2 max-sm:flex-col max-sm:w-[60%] max-sm:mt-8">
-      <Button className={`max-sm:w-full bg-[#8338ec] p-[8px] text-sm text-white rounded-md hover:bg-[#8338eca3]`}>
-        Sign In
-      </Button>
-      <Button className={`text-sm border bg-white border-[#8338ec] text-[#8338ec] hover:bg-[#8338ec] hover:text-white p-[8px] px-6 rounded-md `}>Sign Up</Button>
+    <div className=" max-sm:w-full">
+      {userId ? (
+        <Link href="/my-notes">
+          <Button className={`max-sm:w-full bg-[#8338ec] p-[8px] px-6 text-sm text-white rounded-md`}>Access To The App</Button>
+        </Link>
+      ) : (
+         <div className=" flex gap-2 max-sm:flex-col max-sm:w-[60%] max-sm:mt-8">
+         <Button className={`max-sm:w-full bg-[#8338ec] p-[8px] text-sm text-white rounded-md hover:bg-[#8338eca3]`}>
+           <Link href="/sign-in">Sign In</Link>
+         </Button>
+         <Link href="/sign-up">
+           <Button className={`text-sm border bg-white border-[#8338ec] text-[#8338ec] hover:bg-[#8338ec] hover:text-white p-[8px] px-6 rounded-md `}>Sign Up</Button>
+         </Link>
+
+       </div>
+      )}
     </div>
+   
   );
 }
 
